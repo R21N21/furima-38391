@@ -50,17 +50,17 @@ Things you may want to cover:
 | item_description   | text       | null: false                    |
 | item_price         | integer    | null: false                    |
 | user               | references | null: false, foreign_key: true |
-| category           | integer    | null: false                    |
-| item_condition     | integer    | null: false                    |
-| preparation_day    | integer    | null: false                    |
-| postage_payer      | integer    | null: false                    |
-| prefecture         | integer    | null: false                    |
+| category_id        | integer    | null: false                    |
+| item_condition_id  | integer    | null: false                    |
+| preparation_day_id | integer    | null: false                    |
+| postage_payer_id   | integer    | null: false                    |
+| prefecture_id      | integer    | null: false                    |
 
 
 ### association
 
 - belongs_to :user, dependent: :destroy
-- belongs_to :item_purchase
+- has_one :item_purchase
 - belongs_to_active_hash :category
 - belongs_to_active_hash :item_condition
 - belongs_to_active_hash :preparation_day
@@ -73,19 +73,17 @@ Things you may want to cover:
 | column             | Type       | options                        |
 | ------------------ | ---------- | ------------------------------ |
 | postcode           | string     | null: false                    |
-| prefecture         | integer    | null: false                    |
+| prefecture_id      | integer    | null: false                    |
 | city               | string     | null: false                    |
 | address            | string     | null: false                    |
 | building           | string     |                                |
 | phone_number       | string     | null: false                    |
-| user               | references | null: false, foreign_key: true |
-| item               | references | null: false, foreign_key: true |
-
+| item_purchase      | integer    | null: false, foreign_key: true |
 
 ### association
 
-- has_one  :item_purchase
-- has_one_active_hash :prefecture
+- belongs_to :item_purchase
+- has_one_active_hash :prefecture_id
 
 
 ## item_purchases テーブル
@@ -100,4 +98,4 @@ Things you may want to cover:
 
 - belongs_to :user
 - belongs_to :item
-- belongs_to :purchase_information
+- has_one :purchase_information
