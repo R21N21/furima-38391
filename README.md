@@ -29,7 +29,7 @@ Things you may want to cover:
 | ------------------ | ------ | ------------------------------ |
 | nickname           | string | null: false                    |
 | email              | string | null: false,                   |
-| password           | string | null: false                    |
+| encrypted_password | string | null: false                    |
 | lastname           | string | null: false                    |
 | firstname          | string | null: false                    |
 | lastname_kana      | string | null: false                    |
@@ -48,25 +48,24 @@ Things you may want to cover:
 | ------------------ | ---------- | ------------------------------ |
 | item_name          | string     | null: false                    |
 | item_description   | text       | null: false                    |
-| item_image         | string     | null: false                    |
-| item_price         | string     | null: false                    |
+| item_price         | integer    | null: false                    |
 | user               | references | null: false, foreign_key: true |
-| category           | references | null: false, foreign_key: true |
-| item_condition     | references | null: false, foreign_key: true |
-| preparation_day    | references | null: false, foreign_key: true |
-| postage_payer      | references | null: false, foreign_key: true |
-| prefectures        | references | null: false, foreign_key: true |
+| category           | integer    | null: false                    |
+| item_condition     | integer    | null: false                    |
+| preparation_day    | integer    | null: false                    |
+| postage_payer      | integer    | null: false                    |
+| prefecture         | integer    | null: false                    |
 
 
 ### association
 
 - belongs_to :user, dependent: :destroy
-- has_one :item_purchase
+- belongs_to :item_purchase
 - belongs_to_active_hash :category
 - belongs_to_active_hash :item_condition
 - belongs_to_active_hash :preparation_day
 - belongs_to_active_hash :postage_payer
-- belongs_to_active_hash :prefectures
+- belongs_to_active_hash :prefecture
 
 
 ## purchase_informations テーブル
@@ -74,10 +73,10 @@ Things you may want to cover:
 | column             | Type       | options                        |
 | ------------------ | ---------- | ------------------------------ |
 | postcode           | string     | null: false                    |
-| prefecture         | string     | null: false                    |
+| prefecture         | integer    | null: false                    |
 | city               | string     | null: false                    |
 | address            | string     | null: false                    |
-| building           | string     | null: false                    |
+| building           | string     |                                |
 | phone_number       | string     | null: false                    |
 | user               | references | null: false, foreign_key: true |
 | item               | references | null: false, foreign_key: true |
@@ -85,8 +84,8 @@ Things you may want to cover:
 
 ### association
 
-- has_one  :item_purchases
-- has_one_active_hash :prefectures
+- has_one  :item_purchase
+- has_one_active_hash :prefecture
 
 
 ## item_purchases テーブル
@@ -95,8 +94,6 @@ Things you may want to cover:
 | -------------------- | ---------- | ------------------------------ |
 | user                 | references | null: false, foreign_key: true |
 | item                 | references | null: false, foreign_key: true |
-| purchase_information | references | null: false, foreign_key: true |
-
 
 
 ### association
