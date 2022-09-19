@@ -10,8 +10,10 @@ class User < ApplicationRecord
   validates :nickname, presence: true
   validates :lastname, presence: true
   validates :firstname, presence: true
-  validates :lastname_kana, presence: true
-  validates :firstname_kana, presence: true
   validates :birthday, presence: true
 
+  with_options presence: true do
+    validates :lastname_kana, presence: true, format: {with: /\A[ァ-ヶー]+\z/, message: "is invalid. Input full-width katakana characters."}
+    validates :firstname_kana, presence: true, format: {with: /\A[ァ-ヶー]+\z/, message: "is invalid. Input full-width katakana characters."}
+  end
 end
