@@ -28,7 +28,7 @@ Things you may want to cover:
 | column             | Type   | options                        |
 | ------------------ | ------ | ------------------------------ |
 | nickname           | string | null: false                    |
-| email              | string | null: false,                   |
+| email              | string | null: false, unique: true      |
 | encrypted_password | string | null: false                    |
 | lastname           | string | null: false                    |
 | firstname          | string | null: false                    |
@@ -78,12 +78,12 @@ Things you may want to cover:
 | address            | string     | null: false                    |
 | building           | string     |                                |
 | phone_number       | string     | null: false                    |
-| item_purchase      | integer    | null: false, foreign_key: true |
+| item_purchase      | references | null: false, foreign_key: true |
 
 ### association
 
 - belongs_to :item_purchase
-- has_one_active_hash :prefecture_id
+- belongs_to_active_hash :prefecture
 
 
 ## item_purchases テーブル
