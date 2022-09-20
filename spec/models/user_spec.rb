@@ -10,7 +10,7 @@ RSpec.describe User, type: :model do
         expect(@user).to be_valid
       end
     end
-    
+
     context '新規登録できないとき' do
       it 'nicknameが空では登録できない' do
         @user.nickname = ''
@@ -83,17 +83,22 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Password is too long (maximum is 128 characters)")
       end
       it 'passwordが英語のみでは登録できない' do
-        # @user.password = 'aaaaaa'
-        # @user.password_confirmation = 'aaaaaa'
-        # @user.valid?
-        # binding.pry
-        #expect(@user.errors.full_messages).to include('')
+        @user.password = 'aaaaaa'
+        @user.password_confirmation = 'aaaaaa'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid. Input half-width alphanumeric characters.")
       end
       it 'passwordが数字のみでは登録できない' do
-        
+        @user.password = '111111'
+        @user.password_confirmation = '111111'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid. Input half-width alphanumeric characters.")
       end
       it 'passwordが全角では登録できない' do
-        
+        @user.password = 'ああああああ'
+        @user.password_confirmation = 'ああああああ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid. Input half-width alphanumeric characters.")
       end
       it 'last_name_kanaが全角カタカナ以外では登録できないこと' do
         @user.lastname_kana = '山田'
