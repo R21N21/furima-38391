@@ -2,12 +2,19 @@ require 'rails_helper'
 
 RSpec.describe PurchaseForm, type: :model do
   before do
-    @purchase_form = FactoryBot.build(:purchase_form)
+    @user = FactoryBot.create(:user)
+    @item = FactoryBot.create(:item)
+    @purchase_form = FactoryBot.build(:purchase_form, user_id: @user.id, item_id: @item.id)
+    sleep 0.1
   end
 
   describe '商品購入機能' do
     context '内容に問題がなく保存ができる場合' do
       it 'すべての値が正しく入力されていれば保存できること' do
+        expect(@purchase_form).to be_valid
+      end
+      it '建物名は空でも保存できること' do
+        @purchase_form.building = nil
         expect(@purchase_form).to be_valid
       end
     end
