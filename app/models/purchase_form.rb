@@ -5,11 +5,11 @@ class PurchaseForm
   with_options presence: true do
     validates :user_id
     validates :item_id
-    validates :postcode,       format: { with: /\A\d{3}[-]\d{4}\z/, message: "is invalid. Enter it as follows (e.g. 123-4567)"}
-    validates :prefecture_id,     numericality: { other_than: 1 }
+    validates :postcode,       format: { with: /\A\d{3}[-]\d{4}\z/, message: "はハイフンを含めた半角文字列で入力してください (例：123-4567)"}
+    validates :prefecture_id,     numericality: { other_than: 1, message: 'を選択して下さい' }
     validates :city
     validates :address
-    validates :phone_number,   format: { with: /\A\d{10,11}\z/, message: "is invalid. Input only number" }
+    validates :phone_number,   format: { with: /\A\d{10,11}\z/, message: "は半角数字で10桁または11桁で入力してください" }
     validates :token
   end
 
