@@ -13,11 +13,11 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :item_name
     validates :item_description
-    validates :item_price, numericality: {only_integer: true, greater_than_or_equal_to:300, less_than_or_equal_to: 9999999, message: "is invalid"}
+    validates :item_price, numericality: {only_integer: true, greater_than_or_equal_to:300, less_than_or_equal_to: 9999999 }
     validates :image
   end
 
-  with_options numericality: { other_than: 1 , message: "can't be blank"} do
+  with_options numericality: { other_than: 1, message: 'を選択して下さい'} do
     validates :category_id
     validates :item_condition_id
     validates :preparation_day_id
